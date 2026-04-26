@@ -9,7 +9,6 @@ This public SAITS version is sensor-only:
 - no circadian harmonic channels
 - empirical realistic block masks used as the MIT masking task
 - curriculum buckets: `typ` -> `typ, mod` -> `typ, mod, sev`
-- ramped epochs retained; `use_weighted_block_objective` is `false` by default
 - precomputed target/bucket masked training windows are built before batching
 - evaluation buckets: `typ`, `mod`, and `sev_75_100`
 
