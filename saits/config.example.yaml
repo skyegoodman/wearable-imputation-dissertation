@@ -1,0 +1,86 @@
+seed: 42
+
+data:
+  # Provide your own preprocessed wearable time-series file. CSV is easiest.
+  input_path: data/your_preprocessed_wearable_timeseries.csv
+  datetime_col: timestamp
+  features: &sensor_features
+    - hr
+    - ibi
+    - pulseOx
+    - steps
+    - steps_rate
+    - device_stress
+    - bodyBattery
+    - breathsPerMinute
+    - sleep
+  months_train: 4
+  val_fraction: 0.1
+  min_train_rows: 1000
+  min_val_rows: 200
+
+window:
+  seq_len: 360
+  train_stride: 60
+  eval_stride: 360
+
+eval:
+  mode: realistic_block
+  eval_holdout_prob: 0.10
+  buckets: [typ, mod, sev_75_100]
+  target_only_eval: true
+  min_run: 1
+  quantiles: [0.50, 0.75, 0.90]
+  max_runs_per_bin: null
+  max_resample_tries: 25
+  min_target_gt_frac: 0.80
+  min_helper_template_match_frac: 0.80
+  stratify_starts: true
+
+train:
+  batch_size: 64
+  lr: 0.001
+  weight_decay: 0.0
+  epochs: 50
+  patience: 5
+  min_delta: 0.0
+  steps_per_epoch: 400
+  saving_dir: saits/outputs/saits_realistic_mit
+  model_saving_strategy: best
+  device: null
+  use_dynamic_realistic_train: true
+  realistic_train_mode: precomputed
+  log_cfg_name: saits_realistic_mit
+  realistic_train_buckets: [typ, mod, sev]
+  realistic_train_targets: *sensor_features
+  report_targets:
+    - breathsPerMinute
+    - device_stress
+    - hr
+  ramp_frac: 0.25
+  max_lambda: 0.5
+  use_weighted_block_objective: false
+  realistic_quantiles: [0.50, 0.75, 0.90]
+  realistic_min_run: 1
+  realistic_max_runs_per_bin: 5000
+  realistic_max_resample_tries: 25
+  realistic_min_target_gt_frac: 0.80
+  realistic_min_helper_template_match_frac: 0.80
+  realistic_target_only_eval: true
+  realistic_stratify_starts: true
+  realistic_val_targets: null
+
+model:
+  n_layers: 2
+  d_model: 256
+  d_inner: 128
+  n_heads: 4
+  d_k: 64
+  d_v: 64
+  dropout: 0.1
+  attn_dropout: 0.1
+  sensor_size: 9
+  include_tod: false
+  include_harmonic: false
+  harmonic_features: []
+  harmonic_min_obs: 100

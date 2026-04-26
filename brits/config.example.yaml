@@ -1,0 +1,79 @@
+seed: 42
+
+data:
+  # Provide your own preprocessed wearable time-series file. CSV is easiest.
+  input_path: data/your_preprocessed_wearable_timeseries.csv
+  datetime_col: timestamp
+  features:
+    - hr
+    - ibi
+    - pulseOx
+    - steps
+    - steps_rate
+    - device_stress
+    - bodyBattery
+    - breathsPerMinute
+    - sleep
+
+split:
+  months_train: 4
+  val_fraction: 0.1
+  min_train_rows: 1000
+  min_val_rows: 200
+
+window:
+  seq_len: 360
+  train_stride: 60
+  eval_stride: 360
+
+realistic_masking:
+  quantiles: [0.50, 0.75, 0.90]
+  min_run: 1
+  max_runs_per_bin: 5000
+  max_resample_tries: 25
+  min_target_gt_frac: 0.80
+  min_helper_template_match_frac: 0.80
+  target_only_eval: true
+  stratify_starts: true
+
+model:
+  hid_size: 128
+  dropout: 0.25
+  impute_weight: 1.0
+  label_weight: 0.0
+  include_tod: true
+  include_harmonic: true
+  harmonic_features:
+    - hr
+    - ibi
+    - pulseOx
+    - device_stress
+    - bodyBattery
+  harmonic_min_obs: 100
+
+training:
+  batch_size: 64
+  lr: 0.001
+  weight_decay: 0.0
+  epochs: 40
+  patience: 5
+  min_delta: 0.0
+  steps_per_epoch: 400
+  ramp_frac: 0.25
+  max_lambda: 0.5
+  realistic_train_buckets: [typ, mod, sev]
+  realistic_train_targets: null
+  report_targets:
+    - breathsPerMinute
+    - device_stress
+    - hr
+  device: null
+
+evaluation:
+  batch_size: 32
+  eval_holdout_prob: 0.10
+  buckets: [typ, mod, sev_75_100]
+
+outputs:
+  dir: brits/outputs
+  run_name: brits_tod_harmonic

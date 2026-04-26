@@ -1,0 +1,17 @@
+# Protected/local data
+/data/
+**/data/
+*.parquet
+labfront_export.csv
+pilot_data/
+
+# Python/runtime
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+
+# Large training artifacts; keep metadata intentionally if needed
+**/outputs/**/*.pt
+**/outputs/**/tensorboard/
