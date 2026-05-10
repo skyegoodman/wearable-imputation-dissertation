@@ -81,23 +81,7 @@ This repository extends BRITS with:
 - time-of-day encodings
 - circadian harmonic auxiliary channels
 
-The modified training pipeline progressively exposes the model to increasingly difficult missingness regimes:
-
-- typical gaps
-- moderate gaps
-- severe gaps
-
-with final curriculum sampling weights:
-
-```python
-[0.25, 0.30, 0.45]
-```
-
-corresponding to:
-
-```text
-typical / moderate / severe
-```
+The modified training pipeline progressively exposes the model to increasingly difficult missingness regimes
 
 ---
 
