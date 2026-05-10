@@ -1,4 +1,4 @@
-# Wearable Imputation for Seizure Risk Forecasting
+# Evaluating Deep Multivariate Imputation Models on Wearable Smartwatch Data 
 
 Deep learning framework for imputing missing multimodal smartwatch data under realistic wearable missingness patterns.
 
