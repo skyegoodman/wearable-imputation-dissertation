@@ -4,11 +4,6 @@ Deep learning framework for imputing missing multimodal smartwatch data under re
 
 This repository contains the reproducible codebase accompanying my MEng Engineering Mathematics dissertation at the University of Bristol:
 
-> **Evaluating Deep Multivariate Imputation Models on Wearable Smartwatch Data**
-
-The project evaluates state-of-the-art deep learning imputation models on real-world physiological smartwatch data collected from a person with epilepsy using a Garmin wearable device.
-
----
 
 # Overview
 
@@ -31,25 +26,6 @@ Unlike many benchmark datasets used in multivariate time-series imputation resea
 Standard random-point masking protocols therefore produce unrealistically favourable evaluation conditions for wearable data.
 
 This dissertation develops a wearable-realistic training and evaluation framework designed specifically for multimodal smartwatch missingness.
-
----
-
-# Dissertation Goals
-
-The project had three primary objectives:
-
-1. Characterise the missingness structure of real wearable smartwatch data
-
-2. Develop a wearable-realistic masking and evaluation protocol preserving:
-   - contiguous missing runs
-   - feature-specific outage distributions
-   - co-missingness structure between wearable channels
-
-3. Adapt and evaluate two state-of-the-art deep learning imputation models:
-   - BRITS
-   - SAITS
-
-against classical interpolation baselines under realistic wearable conditions.
 
 ---
 
